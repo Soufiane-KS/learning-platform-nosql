@@ -10,26 +10,21 @@ const config = require('./env');
 let mongoClient, redisClient, db;
 
 async function connectMongo() {
-  try{
+  try {
     mongoClient = new MongoClient(config.mongodb.uri)
     await mongoClient.connect()
     db = mongoClient.db(config.mongodb.dbName)
-  }catch(e){
-      console.error(e)
-  }
-  finally{
-    mongoClient.close()
+  } catch (e) {
+    console.error(e)
   }
 }
 
 async function connectRedis() {
   try {
-    redisClient = new redisClient(config.redis.uri)
+    redisClient = redis.redisClient(config.redis.uri)
     redisClient.connect()
   } catch (error) {
     console.error(error)
-  }finally{
-    redisClient.quit()
   }
 }
 
@@ -38,7 +33,8 @@ module.exports = {
   connectMongo,
   connectRedis,
   db,
-  redisClient
+  redisClient,
+  mongoClient
 };
 
 

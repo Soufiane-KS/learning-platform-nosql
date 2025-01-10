@@ -16,7 +16,7 @@ async function startServer() {
   try {
     await db.connectMongo()
     await db.connectRedis()
-    app.use(express.json)
+    app.use(express.json())
     app.use('/courses',courseRoutes)
     app.use('/students',studentRoutes)
     app.listen(config.port,()=>{
@@ -30,7 +30,14 @@ async function startServer() {
 
 // Gestion propre de l'arrêt
 process.on('SIGTERM', async () => {
-  // TODO: Implémenter la fermeture propre des connexions
+  try {
+    await db.mongoClient.close()
+    await db.redisClient.quit()
+    console.log("connexions fermées")
+    process.exit(0)
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 startServer();
