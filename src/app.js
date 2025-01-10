@@ -1,5 +1,7 @@
 // Question: Comment organiser le point d'entrée de l'application ?
+// Reponse: Le point d'entrée de l'application (app.js) doit initialiser les services essentiels, comme les connexions aux bases de données, la configuration des middlewares et des routes, avant de démarrer le serveur. L'application doit être lancée après que toutes ces étapes soient correctement exécutées.
 // Question: Quelle est la meilleure façon de gérer le démarrage de l'application ?
+// Reponse: Utiliser une fonction asynchrone pour gérer les connexions et configurations (comme startServer()) avant de démarrer le serveur avec app.listen().
 
 const express = require('express');
 const config = require('./config/env');
@@ -12,7 +14,8 @@ const app = express();
 
 async function startServer() {
   try {
-    // TODO: Initialiser les connexions aux bases de données
+    await db.connectMongo()
+    await db.connectRedis()
     // TODO: Configurer les middlewares Express
     // TODO: Monter les routes
     // TODO: Démarrer le serveur
