@@ -19,7 +19,9 @@ async function startServer() {
     app.use(express.json)
     app.use('/courses',courseRoutes)
     app.use('/students',studentRoutes)
-    // TODO: Démarrer le serveur
+    app.listen(config.port,()=>{
+      console.log(`Le serveur et opperationnel sur le port ${config.port}`)
+    })
   } catch (error) {
     console.error('Failed to start server:', error);
     process.exit(1);
