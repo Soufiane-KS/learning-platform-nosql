@@ -16,8 +16,9 @@ async function startServer() {
   try {
     await db.connectMongo()
     await db.connectRedis()
-    // TODO: Configurer les middlewares Express
-    // TODO: Monter les routes
+    app.use(express.json)
+    app.use('/courses',courseRoutes)
+    app.use('/students',studentRoutes)
     // TODO: Démarrer le serveur
   } catch (error) {
     console.error('Failed to start server:', error);
