@@ -21,7 +21,7 @@ Assurez-vous d'avoir installé les éléments suivants sur votre machine :
 1. Clonez le repository :
    ```bash
    git clone https://github.com/Soufiane-KS/learning-platform-nosql.git
-   cd learning-platform
+   cd learning-platform-nosql
    ```
 
 2. Installez les dépendances :
