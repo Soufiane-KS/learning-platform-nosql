@@ -13,7 +13,17 @@ async function cacheData(key, data, ttl) {
     console.error(error)
   }
 }
-  
-  module.exports = {
-    cacheData
-  };
+
+async function getData(key) {
+  try {
+    const data = await redisClient.get(key);
+    return data ? JSON.parse(data) : null;
+  } catch (error) {
+    console.error('Erreur de recherche d\'s de Redis:', error);
+  }
+}
+
+module.exports = {
+  cacheData,
+  getData
+};
