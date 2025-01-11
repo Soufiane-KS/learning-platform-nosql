@@ -21,7 +21,34 @@ async function createCourse(req, res) {
   }
 }
 
+async function getCourse(req, res) {
+  try {
+    const { id } = req.params;
+    const course = await mongoService.findOneById('courses', id);
+    if (!course) {
+      return res.status(404).json({ error: 'Cours introuvable' });
+    }
+    res.json(course);
+  } catch (error) {
+    res.status(500).json({ error: 'error' });
+  }
+}
+
+async function getCourseStats(req, res) {
+  try {
+    const collection = db.db.collection('courses');
+    const count = await collection.countDocuments();
+    res.json({ totalCourses: count });// retourner le nbr total des cours
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching course stats' });
+  }
+}
+
+
+
 // Export des contrôleurs
 module.exports = {
-  createCourse
+  createCourse,
+  getCourse,
+  getCourseStats
 };
