@@ -36,6 +36,3 @@ module.exports = {
   redisClient,
   mongoClient
 };
-
-
-connectMongo().catch(console.error)

@@ -20,3 +20,5 @@
  Réponse: Une route définit l'URL et le type de requête HTTP (GET, POST,...), tandis qu'un contrôleur contient la logique métier associée à cette route.
  Question : Pourquoi séparer la logique métier des routes ?
  Réponse : Pour améliorer la lisibilité, faciliter les tests unitaires et permettre la réutilisation de la logique métier dans d'autres parties de l'application.
+ Question: Pourquoi créer des services séparés ?
+ Réponse: Pour centraliser la logique métier réutilisable, réduire la duplication de code, et maintenir une séparation claire entre la logique métier et les contrôleurs.
