@@ -21,17 +21,34 @@ async function connectMongo() {
 
 async function connectRedis() {
   try {
-    redisClient = redis.redisClient(config.redis.uri)
+    redisClient = redis.createClient(config.redis.uri)
     redisClient.connect()
   } catch (error) {
     console.error(error)
   }
 }
 
+async function closeMongo() {
+  if (mongoClient) {
+    await mongoClient.close();
+  }
+}
+
+async function closeRedis() {
+  if (redisClient) {
+    await redisClient.quit();
+  }
+}
+
+
+
+
 // Export des fonctions et clients
 module.exports = {
   connectMongo,
   connectRedis,
+  closeMongo,
+  closeRedis,
   db,
   redisClient,
   mongoClient

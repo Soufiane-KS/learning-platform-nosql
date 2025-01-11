@@ -7,7 +7,7 @@ const db = require('../config/db');
 // Fonctions utilitaires pour MongoDB
 async function findOneById(collection, id) {
   try {
-    const collection = db.connectMongo().collection(collection)
+    const collection = db.db.collection(collectionName);
     const resultat = await collection.findOne({ _id: new ObjectId(id) });
     return resultat
   } catch (error) {
